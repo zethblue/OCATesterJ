@@ -1,11 +1,11 @@
 package start;
 
-import fragenserialisierer.Fragenserialisierer;
+import fragenanzeiger.Fragenanzeiger;
 
 public class Start {
 
     public static void main(String[] args) {
 
-        new Fragenserialisierer();
+        new Fragenanzeiger();
     }
 }
