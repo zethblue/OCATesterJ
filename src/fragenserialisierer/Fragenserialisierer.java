@@ -25,6 +25,7 @@ public class Fragenserialisierer extends JFrame {
     JButton buttonantwortSpeichernFALSE = new JButton("falsche Antwort");
     JLabel anzahlAntworten = new JLabel("Anzahl Antworten: 0");
     JButton serialisieren = new JButton("Serialisierung");
+    JButton clear = new JButton("Clear");
     JPanel xEmpty = new JPanel();
 
 
@@ -43,12 +44,16 @@ public class Fragenserialisierer extends JFrame {
         buttonLabel.add(buttonantwortSpeichernFALSE);
         buttonLabel.add(buttonantwortSpeichernTRUE);
 
+        JLabel serialisierungsLabel = new JLabel();
+        serialisierungsLabel.setLayout(new GridLayout(2,1));
+        serialisierungsLabel.add(serialisieren); serialisierungsLabel.add(clear);
+
         this.add(frageErstellArea);
         this.add(frageIstErstelltArea);
         this.add(antwortErstellArea);
         this.add(antwortIstErstelltArea);
         this.add(buttonLabel);
-        this.add(serialisieren);
+        this.add(serialisierungsLabel);
 
         this.setSize(1000, 500);
         this.setLocationRelativeTo(null);
@@ -101,13 +106,24 @@ public class Fragenserialisierer extends JFrame {
                 }
             }
         });
+        clear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                antworten = new HashMap<>();
+                frage = "";
+                frageErstellArea.setText("");
+                frageIstErstelltArea.setText("");
+                antwortErstellArea.setText("");
+                aktualisiereAnzeigeAntworten();
+            }
+        });
     }
 
     private void aktualisiereAnzeigeAntworten() {
-        anzahlAntworten.setText("Anzahl Antworten: " + String.valueOf(antworten.size()));
+        anzahlAntworten.setText("Anzahl Antworten: " + antworten.size());
         StringBuilder x = new StringBuilder();
         for (String s : antworten.keySet()) {
-            x.append(s + "\n");
+            x.append(s).append("\n");
         }
         antwortIstErstelltArea.setText(x.toString());
     }
